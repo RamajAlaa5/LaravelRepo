@@ -26,7 +26,7 @@
               <tr>
                 <td>{{ $post->id}}</th>
                 <td>{{ $post->title }}</td>
-                <td>{{ $post->creator }}</td>
+                <td>{{ $post->user->name }}</td>
                 <td>{{ $post->description }}</td>
                 <td>{{ $post->created_at }}</td>
                 <td><img src="{{ asset('images/'.$post->image) }}" class="img-thumbnail" width="90" height="90" /></td>
