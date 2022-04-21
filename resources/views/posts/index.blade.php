@@ -24,7 +24,7 @@
             <tbody>
             @foreach ( $posts as $post)
               <tr>
-                <td>{{ $post->id}}</th>
+                <td>{{ $post->id}}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->user->name }}</td>
                 <td>{{ $post->description }}</td>
@@ -35,13 +35,22 @@
                     <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info">View</a>
                     <a href="{{ route('posts.edit',$post->id) }}" class="btn btn-primary">Edit</a>
                    <a class="btn btn-danger" onclick="return confirm('Are You Sure You Want To Delete This Post?')" href="{{route('posts.remove', $post->id)}}">Delete</a>
+                </td>
 
+              </tr>
 
-    </div>
 
 
     @endforeach
-
+</tbody>
+</table>
 
 @endsection
+
+@section('content2')
+<h3>Pagination</h3>
+{{ $posts->links() }}
+@endsection
+
+
 

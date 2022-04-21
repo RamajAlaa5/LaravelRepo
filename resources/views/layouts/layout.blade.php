@@ -14,6 +14,7 @@
       {{ Session::get('success') }}
       </div>
     @endif
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">ITI Blog Post</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,8 +26,12 @@
           </div>
         </div>
       </nav>
+
     <div class="container">
         @yield('content')
+    </div>
+    <div class="container">
+        @yield('content2')
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -34,4 +39,6 @@
 
     </body>
     </html>
+
+
 
