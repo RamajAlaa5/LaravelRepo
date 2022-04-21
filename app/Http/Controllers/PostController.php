@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts=Post::all();
+        $posts= Post::paginate(4); //Eloquent ORM
         return view('posts.index', compact('posts'));
     }
 

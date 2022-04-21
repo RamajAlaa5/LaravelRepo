@@ -8,6 +8,7 @@
         </div>
 
 
+
         <table class="table mt-4" id="datatable">
             <thead>
               <tr>
@@ -30,9 +31,11 @@
                 <td>{{ $post->created_at }}</td>
                 <td><img src="{{ asset('images/'.$post->image) }}" class="img-thumbnail" width="90" height="90" /></td>
                 <td>
+
                     <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info">View</a>
                     <a href="{{ route('posts.edit',$post->id) }}" class="btn btn-primary">Edit</a>
-                   <a class="btn btn-danger" onclick="return confirm('Are You Sure To Delete This Post?')" href="{{route('posts.remove', $post->id)}}">Delete</a>
+                   <a class="btn btn-danger" onclick="return confirm('Are You Sure You Want To Delete This Post?')" href="{{route('posts.remove', $post->id)}}">Delete</a>
+
 
     </div>
 
@@ -40,9 +43,5 @@
     @endforeach
 
 
-
 @endsection
-
-
-
 

@@ -14,8 +14,8 @@ use App\Http\Controllers\PostController;
 */
 //<a class="btn btn-danger" onclick="return confirm('Are you sure?')" href="{{route('city-delete', $result->my_id)}}"><i class="fa fa-trash"></i></a>
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/test', function () {
+    return view('posts.testAlert');
 });
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
