@@ -25,12 +25,12 @@
 
 <div class="card">
     <div class="card-header">
-        Comments
+       All Comments
     </div>
     <div class="card-body">
         <form action="" method="POST">
             @csrf
-            <label for="exampleFormControlTextarea1" class="form-label">By</label>
+            <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
             <select name="creator" class="form-control">
                 @foreach ($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -39,9 +39,9 @@
             <div class="form-group">
                 <textarea name="body" id="body" cols="15" rows="4" class="form-control" placeholder="Enter Your comment here"></textarea>
             </div>
-
+<br>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Add Comment</button>
+                <button type="submit" class="btn btn-success">Add Comment</button>
             </div>
         </form>
 
