@@ -30,8 +30,8 @@ class PostController extends Controller
     public function create()
     {
          $posts=Post::all();
-         $users=User::all();
-        return view("posts.create",compact(["posts","users"]));
+//         $users=User::all();
+        return view("posts.create",compact("posts"));
     }
 
     /**
@@ -65,7 +65,8 @@ class PostController extends Controller
     public function show($id)
     {
         $post =Post::findOrFail($id);
-        return view("posts.show",compact('post'));
+        $users=User::all();
+        return view("posts.show",compact(['post','users']));
     }
 
     /**
