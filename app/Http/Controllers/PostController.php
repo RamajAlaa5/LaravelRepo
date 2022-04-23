@@ -42,7 +42,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(StorePostRequest $request)
     {
         $imageName = time().'.'.request()->image->getClientOriginalExtension();
         request()->image->move(public_path('/images'), $imageName);
@@ -98,7 +98,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(UpdatePostRequest $request,$id)
     {
 
         $post =Post::findOrFail($id);
@@ -114,7 +114,6 @@ class PostController extends Controller
         }
         $post->save();
         return redirect(route('posts.index'))->with('success','Updated Successfully');
-
 
     }
 
