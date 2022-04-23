@@ -2,8 +2,10 @@
 
 namespace App;
 use Illuminate\Database\Eloquent\Model;
+
 class Post extends Model
 {
+
     protected $guarded=[];
     public function user()
     {
@@ -13,5 +15,14 @@ class Post extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
+
+    // public function sluggable(): array
+    // {
+    //     return [
+    //         'slug' => [
+    //             'source' => 'title'
+    //         ]
+    //     ];
+    // }
 
 }
