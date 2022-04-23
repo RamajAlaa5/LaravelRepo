@@ -65,8 +65,8 @@
                     {{ $comment->user->name }}
                 </div>
 <br>
-                <a href="" class="btn btn-primary">Edit</a>
-                <a href="" class="btn btn-danger">Delete</a>
+<a href="{{ route('comments.edit',$comment->id) }}" class="btn btn-primary">Edit</a>
+<a href="" class="btn btn-danger">Delete</a>
             </div>
         </div>
         @endforeach

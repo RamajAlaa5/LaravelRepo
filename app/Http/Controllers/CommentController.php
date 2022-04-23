@@ -42,7 +42,7 @@ class CommentController extends Controller
           $comment->commentable_id=request('commentable_id');
         $comment->commentable_type=request('commentable_type');
         $comment->save();
-        return redirect(route('posts.index'))->with('success','Added Successfully');
+        return redirect(route('posts.show'))->with('success','Added Successfully');
     }
 
     /**
@@ -64,7 +64,8 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-
+        $comment = Comment::findOrFail($id);
+        return view('comments.edit',compact('comment'));
 
     }
 
@@ -77,6 +78,10 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $comment = Comment::findOrFail($id);
+        $comment->body=request('body');
+        $comment->save();
+        return redirect(route('posts.show',['id'=>$comment->commentable_id]))->with('success','Updated Successfully');
 
 
     }
@@ -89,6 +94,10 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+        return redirect(route('posts.show',['id'=>$comment->commentable_id]))->with('success','Deleted Successfully');
+
 
     }
 }
