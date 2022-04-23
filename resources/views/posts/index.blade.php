@@ -34,13 +34,18 @@
 
                     <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info">View</a>
                     <a href="{{ route('posts.edit',$post->id) }}" class="btn btn-primary">Edit</a>
-                   <a class="btn btn-danger" onclick="return confirm('Are You Sure You Want To Delete This Post?')" href="{{route('posts.remove', $post->id)}}">Delete</a>
+                    <form  method="POST" action="{{route('posts.destroy',['post'=>$post->id])}}">
+                        @csrf
+                        @method('delete')
+
+                   {{--  <a class="btn btn-danger" onclick="return confirm('Are You Sure You Want To Delete This Post?')" href="{{route('posts.destroy', $post->id)}}">Delete</a>  --}}
+                   <button class="btn btn-danger" style="margin-left: 123px;margin-top:-66px;" title="Delete" type="submit" onclick="return confirm('Are You Sure You Want To Delete This Post?')">Delete</button>
+
+
+                </form>
                 </td>
 
               </tr>
-
-
-
     @endforeach
 </tbody>
 </table>

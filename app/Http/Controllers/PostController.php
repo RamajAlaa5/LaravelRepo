@@ -42,8 +42,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        request()->image->move(public_path('/images'), $imageName);
+        // $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        // request()->image->move(public_path('/images'), $imageName);
+        if($files=request()->file('image'))
+        {
+         $imageName = time().'.'.request()->image->getClientOriginalExtension();
+         request()->image->move(public_path('/images'), $imageName);
+        }
         $post = new Post();
         $post->user_id=request('creator');
         $post->creator=User::select("name")->where("id","=",$post->user_id)->get();
