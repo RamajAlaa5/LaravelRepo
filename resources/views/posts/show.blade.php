@@ -28,7 +28,7 @@
        All Comments
     </div>
     <div class="card-body">
-        <form action="" method="POST">
+        <form action="{{route('comments.store', ['user_id' => Auth::id(), 'commentable_id' => $post->id, 'commentable_type' => get_class($post)])}}" method="POST">
             @csrf
             <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
             <select name="creator" class="form-control">
@@ -44,33 +44,36 @@
                 <button type="submit" class="btn btn-success">Add Comment</button>
             </div>
         </form>
-
-<!--        @if(count($post->comments) > 0)-->
-<!--        @foreach($post->comments as $comment)-->
-<!--        <div class="card">-->
-<!--            <div class="card-header">-->
-<!--                {{$comment->user->name}}-->
-<!--            </div>-->
-<!--            <div class="card-body">-->
-<!--                <div>-->
-<!--                    <span style="font-size: 1.2rem; font-weight: bold">Comment: </span>-->
-<!--                    {{$comment->body}}-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <span style="font-size: 1rem; font-weight: bold">Created At: </span>-->
-<!--                    {{ \Carbon\Carbon::parse($comment->created_at)->format('l jS \\of F Y h:i:s A') }}-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <span style="font-size: 1rem; font-weight: bold">By: </span>-->
-<!--                    {{ $comment->user->name }}-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        @endforeach-->
-<!--        @else-->
-<!--        <div>No comments yet</div>-->
-<!--        @endif-->
-<!--    </div>-->
+<br>
+        @if(count($post->comments) > 0)
+        @foreach($post->comments as $comment)
+        <div class="card">
+            <div class="card-header">
+                {{$comment->user->name}}
+            </div>
+            <div class="card-body">
+                <div>
+                    <span style="font-size: 1.2rem; font-weight: bold">Comment: </span>
+                    {{$comment->body}}
+                </div>
+                <div>
+                    <span style="font-size: 1rem; font-weight: bold">Created At: </span>
+                    {{ \Carbon\Carbon::parse($comment->created_at)->format('l jS \\of F Y h:i:s A') }}
+                </div>
+                <div>
+                    <span style="font-size: 1rem; font-weight: bold">By: </span>
+                    {{ $comment->user->name }}
+                </div>
+<br>
+                <a href="" class="btn btn-primary">Edit</a>
+                <a href="" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+        @endforeach
+        @else
+        <div>No Comments Yet For This Post</div>
+        @endif
+    </div>
 </div>
 
 

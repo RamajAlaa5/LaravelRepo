@@ -30,8 +30,8 @@ class PostController extends Controller
     public function create()
     {
          $posts=Post::all();
-//         $users=User::all();
-        return view("posts.create",compact("posts"));
+       $users=User::all();
+        return view("posts.create",compact("posts",'users'));
     }
 
     /**
@@ -47,7 +47,6 @@ class PostController extends Controller
         $post = new Post();
         $post->user_id=request('creator');
         $post->creator=User::select("name")->where("id","=",$post->user_id)->get();
-
         $post->title=request(("title"));
         $post->description=request(("description"));
         $post->image=$imageName;

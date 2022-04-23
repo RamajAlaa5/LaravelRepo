@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -21,9 +22,10 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('posts.show');
+        $post=Post::findOrFail($id);
+        return view('posts.show',compact('post'));
     }
 
     /**
@@ -34,7 +36,13 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          $comment = new Comment();
+          $comment->user_id=request('creator');
+          $comment->body=request('body');
+          $comment->commentable_id=request('commentable_id');
+        $comment->commentable_type=request('commentable_type');
+        $comment->save();
+        return redirect(route('posts.index'))->with('success','Added Successfully');
     }
 
     /**
@@ -56,7 +64,8 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
+
+
     }
 
     /**
@@ -68,7 +77,8 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+
     }
 
     /**
@@ -79,6 +89,6 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }
