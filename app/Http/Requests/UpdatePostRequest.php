@@ -27,8 +27,8 @@ class UpdatePostRequest extends FormRequest
         return [
             'title' => ['unique:posts','min:3'],
             'description' => [ 'min:10'],
-            'image'=>['mimes:png,jpg'],
-            'creator'=>'exists:posts,user_id'
+            //'image'=>['mimes:png,jpg'],
+            //'creator'=>'exists:posts,user_id'
         ];
     }
 
@@ -38,8 +38,8 @@ class UpdatePostRequest extends FormRequest
             'title.min' => 'Minimun Length for Title is 3 chars',
             'title.unique'=>'Title Field Must Be Unique',
             'description.min' => 'Minimun Length for Description is 10 chars',
-            'image.mimes' => 'Only Allowed Extensions Are png,jpg',
-            'creator.exists'=>'The Selected Post Creator Not Found'
+            //'image.mimes' => 'Only Allowed Extensions Are png,jpg',
+            //'creator.exists'=>'The Selected Post Creator Not Found'
         ];
     }
 }

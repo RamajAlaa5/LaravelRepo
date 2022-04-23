@@ -22,7 +22,7 @@
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control " id="exampleFormControlTextarea1" placeholder="Enter Post Description" name="description" rows="3"></textarea>
+                <textarea class="form-control " id="exampleFormControlTextarea1" placeholder="Enter Post Description" name="description" rows="3">{{ old('description') }}</textarea>
 
             </div>
 
@@ -34,9 +34,10 @@
                         {{ $user->name }}
                     </option>
                 @endforeach
-
                 </select>
             </div>
+
+
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Post Image</label>
                 <input type="file" class="form-control" name="image" />

@@ -14,6 +14,7 @@
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Title</th>
+                <th scope="col">Slug</th>
                 <th scope="col">Posted By</th>
                 <th scope="col">Description</th>
                 <th scope="col">Created At</th>
@@ -26,6 +27,7 @@
               <tr>
                 <td>{{ $post->id}}</td>
                 <td>{{ $post->title }}</td>
+                <td>{{ $post->slug }}</td>
                 <td>{{ $post->user->name }}</td>
                 <td>{{ $post->description }}</td>
                 <td>{{ $post->created_at }}</td>

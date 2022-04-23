@@ -10,6 +10,8 @@
     <div class="card-body">
         <h5 class="form-label">Title: {{ $post->title }}</h5>
         <h5 class="form-label">Description:{{ $post->description }} </h5>
+        <h5 class="form-label">slug:{{ $post->slug }} </h5>
+
     </div>
 </div>
 

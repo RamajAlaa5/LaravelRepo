@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 use DB;
 use App\User;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
@@ -41,7 +42,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request)
+    public function store()
     {
         $imageName = time().'.'.request()->image->getClientOriginalExtension();
         request()->image->move(public_path('/images'), $imageName);
@@ -57,9 +58,7 @@ class PostController extends Controller
         //  request()->image->move(public_path('/images'), $imageName);
         //  $post->image=$imageName;
         // }
-$post->image=$imageName;
-
-
+         $post->image=$imageName;
         $post->save();
         return redirect(route('posts.index'))->with('success','Added Successfully');
 
@@ -101,6 +100,7 @@ $post->image=$imageName;
      */
     public function update($id)
     {
+
         $post =Post::findOrFail($id);
         $post->user_id=request('creator');
         $post->creator=User::select("name")->where("id","=",$post->user_id)->get();

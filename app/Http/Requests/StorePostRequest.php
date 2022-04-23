@@ -13,7 +13,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -26,8 +26,8 @@ class StorePostRequest extends FormRequest
         return [
             'title' => ['required','unique:posts','min:3'],
             'description' => ['required', 'min:10'],
-            'image'=>['required','mimes:png,jpg'],
-            'creator'=>'exists:posts,user_id'
+            //'image'=>['mimes:png,jpg'],
+            //'creator'=>'exists:posts,user_id'
         ];
 
     }
@@ -44,7 +44,7 @@ class StorePostRequest extends FormRequest
             'description.min' => 'Minimun Length for Description is 10 chars',
             'image.required' => 'Image Field Is Required',
             'image.mimes' => 'Only Allowed Extensions Are png,jpg',
-            'creator.exists'=>'The Selected Post Creator Not Found'
+            //'creator.exists'=>'The Selected Post Creator Not Found'
         ];
     }
 }
