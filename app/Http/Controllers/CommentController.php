@@ -42,7 +42,8 @@ class CommentController extends Controller
           $comment->commentable_id=request('commentable_id');
           $comment->commentable_type=request('commentable_type');
           $comment->save();
-        return redirect(route('posts.index'))->with('success','Added Successfully');
+        //return redirect(route('posts.show'))->with('success','Added Successfully');
+        return back()->with('success','Added Successfully');
     }
 
     /**

@@ -65,8 +65,15 @@
                 </div>
 <br>
         <a href="{{ route('comments.edit',$comment->id) }}" class="btn btn-primary">Edit</a>
-        <a href="{{ route('comments.remove',$comment->id) }}" class="btn btn-danger">Delete</a>
-            </div>
+        <form  method="POST" action="{{route('comments.remove',$comment->id)}}">
+            @csrf
+            @method('delete')
+
+       {{--  <a class="btn btn-danger" onclick="return confirm('Are You Sure You Want To Delete This Post?')" href="{{route('posts.destroy', $post->id)}}">Delete</a>  --}}
+       <button class="btn btn-danger" style="margin-left:70px;margin-top:-66px;" title="Delete" type="submit" onclick="return confirm('Are You Sure You Want To Delete This Comment?')">Delete</button>
+
+
+    </form>            </div>
         </div>
         @endforeach
         @else

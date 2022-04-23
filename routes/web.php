@@ -43,11 +43,12 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.
 Route::get('/comments/create/', [CommentController::class, 'create'])->name('comment.create');
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
-Route::get('/comments/{id}',[CommentController::class,'destroy'])->name('comments.remove');
+// Route::get('/comments/{id}',[CommentController::class,'destroy'])->name('comments.remove');
 
 Route::get('/comments/edit/{id}',[CommentController::class,'edit'])->name('comments.edit');
 Route::put('/comments/update/{id}',[CommentController::class,'update'])->name('comments.update');
 //Route::get('/comments/{comment}/delete', [\App\Http\Controllers\CommentController::class, 'destroy'])->name('comments.remove');
+Route::delete('/comments/{post}', [CommentController::class, 'destroy'])->name('comments.remove');
 
 
 //Auth::routes();
