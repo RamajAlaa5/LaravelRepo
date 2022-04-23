@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 
 @section('title')Show @endsection
 
@@ -70,7 +70,7 @@
             @method('delete')
 
        {{--  <a class="btn btn-danger" onclick="return confirm('Are You Sure You Want To Delete This Post?')" href="{{route('posts.destroy', $post->id)}}">Delete</a>  --}}
-       <button class="btn btn-danger" style="margin-left:70px;margin-top:-66px;" title="Delete" type="submit" onclick="return confirm('Are You Sure You Want To Delete This Comment?')">Delete</button>
+       <button class="btn btn-danger" style="margin-left:59px;margin-top:-60px;" title="Delete" type="submit" onclick="return confirm('Are You Sure You Want To Delete This Comment?')">Delete</button>
 
 
     </form>            </div>

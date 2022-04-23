@@ -1,5 +1,5 @@
-@extends('layouts.layout')
-
+{{--  @extends('layouts.layout')  --}}
+@extends('layouts.app')
 @section('title')Index @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
 
 
 
-        <table class="table mt-4" id="datatable">
+        <table class="table mt-4" id="datatable" style="border: 5px;">
             <thead>
               <tr>
                 <th scope="col">ID</th>
@@ -32,14 +32,14 @@
                 <td><img src="{{ asset('images/'.$post->image) }}" class="img-thumbnail" width="90" height="90" /></td>
                 <td>
 
-                    <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info">View</a>
-                    <a href="{{ route('posts.edit',$post->id) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ route('posts.show', $post->id) }}" style="color: white" class="btn btn-primary">View</a>
+                    <a href="{{ route('posts.edit',$post->id) }}" class="btn btn-success">Edit</a>
                     <form  method="POST" action="{{route('posts.destroy',['post'=>$post->id])}}">
                         @csrf
                         @method('delete')
 
                    {{--  <a class="btn btn-danger" onclick="return confirm('Are You Sure You Want To Delete This Post?')" href="{{route('posts.destroy', $post->id)}}">Delete</a>  --}}
-                   <button class="btn btn-danger" style="margin-left: 123px;margin-top:-66px;" title="Delete" type="submit" onclick="return confirm('Are You Sure You Want To Delete This Post?')">Delete</button>
+                   <button class="btn btn-danger" style="margin-left: 116px;margin-top:-63px;" title="Delete" type="submit" onclick="return confirm('Are You Sure You Want To Delete This Post?')">Delete</button>
 
 
                 </form>

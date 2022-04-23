@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Carbon;
 use DB;
 use App\User;
+use App\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
@@ -40,21 +41,25 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        // $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        // request()->image->move(public_path('/images'), $imageName);
-        if($files=request()->file('image'))
-        {
-         $imageName = time().'.'.request()->image->getClientOriginalExtension();
-         request()->image->move(public_path('/images'), $imageName);
-        }
+        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('/images'), $imageName);
+
         $post = new Post();
         $post->user_id=request('creator');
         $post->creator=User::select("name")->where("id","=",$post->user_id)->get();
         $post->title=request(("title"));
         $post->description=request(("description"));
-        $post->image=$imageName;
+        // if($files=request()->file('image'))
+        // {
+        //  $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        //  request()->image->move(public_path('/images'), $imageName);
+        //  $post->image=$imageName;
+        // }
+$post->image=$imageName;
+
+
         $post->save();
         return redirect(route('posts.index'))->with('success','Added Successfully');
 
