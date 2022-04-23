@@ -40,8 +40,8 @@ class CommentController extends Controller
           $comment->user_id=request('creator');
           $comment->body=request('body');
           $comment->commentable_id=request('commentable_id');
-        $comment->commentable_type=request('commentable_type');
-        $comment->save();
+          $comment->commentable_type=request('commentable_type');
+          $comment->save();
         return redirect(route('posts.show'))->with('success','Added Successfully');
     }
 
@@ -97,7 +97,5 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         $comment->delete();
         return redirect(route('posts.show',['id'=>$comment->commentable_id]))->with('success','Deleted Successfully');
-
-
     }
 }
