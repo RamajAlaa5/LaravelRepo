@@ -10,6 +10,8 @@ use DB;
 use App\User;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -44,21 +46,18 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        request()->image->move(public_path('/images'), $imageName);
+
 
         $post = new Post();
+        $file = $request->file('image');
+        $imageName = $file->getClientOriginalName();
+        $path = Storage::putFileAs('public/images', $request->file('image'), $imageName);
         $post->user_id=request('creator');
         $post->creator=User::select("name")->where("id","=",$post->user_id)->get();
         $post->title=request(("title"));
         $post->description=request(("description"));
-        // if($files=request()->file('image'))
-        // {
-        //  $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        //  request()->image->move(public_path('/images'), $imageName);
-        //  $post->image=$imageName;
-        // }
-         $post->image=$imageName;
+        $post->slug=Str::slug($request->input('title'));
+        $post->image=$imageName;
         $post->save();
         return redirect(route('posts.index'))->with('success','Added Successfully');
 
@@ -101,17 +100,20 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request,$id)
     {
 
+
         $post =Post::findOrFail($id);
         $post->user_id=request('creator');
         $post->creator=User::select("name")->where("id","=",$post->user_id)->get();
         $post->title=request(("title"));
         $post->description=request(("description"));
-        if($files=request()->file('image'))
-        {
-         $imageName = time().'.'.request()->image->getClientOriginalExtension();
-         request()->image->move(public_path('/images'), $imageName);
-         $post->image=$imageName;
+
+        if ($request->hasFile('image')){
+            $file = $request->file('image');
+            $imageName = $file->getClientOriginalName();
+            $path = Storage::putFileAs('public/images', $request->file('image'), $imageName);
+            $post->image=$imageName;
         }
+
         $post->save();
         return redirect(route('posts.index'))->with('success','Updated Successfully');
 
@@ -127,6 +129,7 @@ class PostController extends Controller
     {
         $post =Post::findOrFail($id);
         $post->delete();
+        Storage::delete('images/'.$post->image);
         return redirect(route('posts.index'))->with('success','Deleted Successfully');
     }
 

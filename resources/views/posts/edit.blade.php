@@ -37,7 +37,7 @@
             <div class="mb-3">
                 <label class="exampleFormControlTextarea1">Post Image</label>
                 <div class="col-md-8 form-control" style="height: 85px;">
-                 <img   id="original" src="{{ asset('/images/'.$post->image) }}" height="70" width="70">
+                 <img   id="original" src="{{asset('/storage/images/'.$post->image)}}" height="70" width="70">
                  <input type="file" name="image" value="{{ $post->image }}" />
                 </div>
                </div>

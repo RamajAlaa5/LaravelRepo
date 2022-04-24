@@ -31,7 +31,7 @@
                 <td>{{ $post->user->name }}</td>
                 <td>{{ $post->description }}</td>
                 <td>{{ $post->created_at }}</td>
-                <td><img src="{{ asset('images/'.$post->image) }}" class="img-thumbnail" width="90" height="90" /></td>
+                <td><img src="{{asset('/storage/images/'.$post->image)}}" class="img-thumbnail" width="90" height="90" /></td>
                 <td>
 
                     <a href="{{ route('posts.show', $post->id) }}" style="color: white" class="btn btn-primary">View</a>
