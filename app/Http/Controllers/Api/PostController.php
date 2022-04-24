@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function index(){
          $posts =Post::all();
-         return  PostResource::Collection($posts);
+         return  PostResource::collection($posts);
     }
 
 
