@@ -41,11 +41,18 @@
                         @method('delete')
 
                    {{--  <a class="btn btn-danger" onclick="return confirm('Are You Sure You Want To Delete This Post?')" href="{{route('posts.destroy', $post->id)}}">Delete</a>  --}}
-                   <button class="btn btn-danger" style="margin-left: 116px;margin-top:-63px;" title="Delete" type="submit" onclick="return confirm('Are You Sure You Want To Delete This Post?')">Delete</button>
+                   <button class="btn btn-danger" style="margin-left: 118px;margin-top:-63px;" title="Delete" type="submit" onclick="return confirm('Are You Sure You Want To Delete This Post?')">Delete</button>
 
 
                 </form>
-                </td>
+
+                    {{--  <form method="post" action="{{ route('post.restore', ['id' => $post->id])}}">
+                        @csrf
+                        @method('put')
+                        <button type="submit" style="margin-left: 192px;margin-top:-109px;"  class="btn btn-warning"><i class="bi bi-pencil-square"></i> Restore</button>
+                        <input name="id" type="hidden" value="{{ $post->id }}">
+                    </form>  --}}
+
 
               </tr>
     @endforeach

@@ -129,4 +129,13 @@ class PostController extends Controller
         $post->delete();
         return redirect(route('posts.index'))->with('success','Deleted Successfully');
     }
+
+    // public function restore($id){
+    //     $post =Post::withTrashed($id)->where('id', $id)->first();
+    //     $post->restore();
+    //     $post->save();
+
+    //     return redirect(route('posts.index'))->with('success','Restored Successfully');
+
+    // }
 }
