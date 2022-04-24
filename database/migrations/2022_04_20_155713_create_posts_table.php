@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->text('description');
             $table->string("creator");
             $table->string('image');
-            $table->softDeletes();
+            //$table->softDeletes();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

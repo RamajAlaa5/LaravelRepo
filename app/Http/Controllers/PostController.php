@@ -12,6 +12,8 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Comment;
+use App\Jobs\PruneOldPostsJob;
 
 class PostController extends Controller
 {
@@ -23,6 +25,7 @@ class PostController extends Controller
     public function index()
     {
         $posts= Post::paginate(3);
+        PruneOldPostsJob::dispatch();
         return view('posts.index', compact('posts'));
     }
 
@@ -106,6 +109,7 @@ class PostController extends Controller
         $post->creator=User::select("name")->where("id","=",$post->user_id)->get();
         $post->title=request(("title"));
         $post->description=request(("description"));
+        $post->slug=Str::slug($request->input('title'));
 
         if ($request->hasFile('image')){
             $file = $request->file('image');
@@ -130,6 +134,7 @@ class PostController extends Controller
         $post =Post::findOrFail($id);
         $post->delete();
         Storage::delete('images/'.$post->image);
+        Comment::where('commentable_id', $id)->delete();
         return redirect(route('posts.index'))->with('success','Deleted Successfully');
     }
 

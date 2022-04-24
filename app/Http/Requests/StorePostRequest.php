@@ -24,10 +24,10 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-                'title' => ['required', 'min:3', 'unique:posts'],
+                'title' => ['required|unique:posts|min:3'],
                 'description' => ['required', 'min:10'],
                 //'user_id'=>['required','exists:users,id'],
-                //'image'=>['required','image','mimes:jpg,png']
+                'image'=>['image','mimes:jpg,png']
         ];
 
     }
@@ -42,9 +42,8 @@ class StorePostRequest extends FormRequest
             'title.unique'=>'Title Field Must Be Unique',
             'description.required'=>'Description Field Is Required',
             'description.min' => 'Minimun Length for Description is 10 chars',
-            //'image.required' => 'Image Field Is Required',
-            //'image.mimes' => 'Only Allowed Extensions Are png,jpg',
-            //'user_id.exists'=>'The Selected Post Creator Not Found'
+            'image.mimes' => 'Only Allowed Extensions Are png,jpg',
+            'user_id.exists'=>'The Selected Post Creator Not Found'
         ];
     }
 }

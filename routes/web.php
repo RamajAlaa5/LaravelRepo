@@ -2,6 +2,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Auth\LoginController;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,8 +56,33 @@ Route::get('/auth/redirect', function () {
     return Socialite::driver('github')->redirect();
 })->name('github.auth');
 
+// Route::get('/auth/callback', function () {
+//     $user = Socialite::driver('github')->stateless()->user();
+//  dd($user);
+//     //$user->token;
+// });
+
+
 Route::get('/auth/callback', function () {
-    $user = Socialite::driver('github')->user();
- dd($user);
+    $githubUser = Socialite::driver('github')->stateless()->user();
+
+    $user = User::updateOrCreate([
+        'github_id' => $githubUser->id,
+    ], [
+        'name' => $githubUser->name,
+        'email' => $githubUser->email,
+        'github_token' => $githubUser->token,
+        'github_refresh_token' => $githubUser->refreshToken,
+    ]);
+
+    Auth::login($user);
+    return redirect()->route('posts.index');
     // $user->token
 });
+
+
+
+
+Route::get('auth/google', [LoginController::class, 'redirectToGoogle'])->name('google.auth');
+Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
