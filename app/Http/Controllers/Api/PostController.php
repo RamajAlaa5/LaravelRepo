@@ -7,19 +7,20 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\User;
 use App\Http\Requests\StorePostRequest;
-
+use App\Http\Resources\PostResource;
+use Illuminate\Database\Eloquent\Collection;
 class PostController extends Controller
 {
     public function index(){
          $posts =Post::all();
-         return $posts;
-        // return 'we are in inex';
+         return  PostResource::Collection($posts);
     }
 
 
     public function show($id){
         $post =Post::findOrFail($id);
-        return $post;
+        // return $post;
+        return new PostResource($post);
    }
 
 
